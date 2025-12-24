@@ -115,6 +115,8 @@ train_subset, val_subset = random_split(
 
 normalize = transforms.Normalize(mean=CIFAR10_MEAN, std=CIFAR10_STD)
 train_transform = transforms.Compose([
+    transforms.RandomCrop(32, padding=4),
+    transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
     normalize
 ])
@@ -162,7 +164,7 @@ best_val_loss = float("inf")
 best_state = None
 epochs_no_improve = 0
 
-run_dir = "runs/baseline_norm"
+run_dir = "runs/baseline_norm_aug"
 os.makedirs(run_dir, exist_ok=True)
 
 log_path = os.path.join(run_dir, "train_log.csv")
