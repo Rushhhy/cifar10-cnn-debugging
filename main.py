@@ -29,6 +29,9 @@ CLASS_NAMES = [
     "truck",
 ]
 
+CIFAR10_MEAN = [0.4914, 0.4822, 0.4465]
+CIFAR10_STD = [0.2470, 0.2435, 0.2616]
+
 @torch.no_grad()
 def save_failures(cnn_model, dataloader, run_dir, max_to_save=100):
     fail_dir = os.path.join(run_dir, "failures")
@@ -110,18 +113,25 @@ train_subset, val_subset = random_split(
     generator=torch.Generator().manual_seed(42)
 )
 
-train_transform = transforms.ToTensor()
-val_transform = transforms.ToTensor()
+normalize = transforms.Normalize(mean=CIFAR10_MEAN, std=CIFAR10_STD)
+train_transform = transforms.Compose([
+    transforms.ToTensor(),
+    normalize
+])
+test_transform = transforms.Compose([
+    transforms.ToTensor(),
+    normalize
+])
 
-test_dataset = CIFAR10(root="data", train=False, download=True, transform=val_transform)
+test_dataset = CIFAR10(root="data", train=False, download=True, transform=test_transform)
 base_train = CIFAR10(root="data", train=True, download=False, transform=train_transform)
-base_val = CIFAR10(root="data", train=True, download=False, transform=val_transform)
+base_val = CIFAR10(root="data", train=True, download=False, transform=test_transform)
 
 train_indices = train_subset.indices
 val_indices = val_subset.indices
 
 train_split = Subset(base_train, train_indices)
-val_split = Subset(base_val,   val_indices)
+val_split = Subset(base_val, val_indices)
 
 train_loader = DataLoader(
     train_split,
@@ -152,7 +162,7 @@ best_val_loss = float("inf")
 best_state = None
 epochs_no_improve = 0
 
-run_dir = "runs/run_001_baseline"
+run_dir = "runs/baseline_norm"
 os.makedirs(run_dir, exist_ok=True)
 
 log_path = os.path.join(run_dir, "train_log.csv")
