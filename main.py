@@ -16,6 +16,8 @@ import copy
 from torchvision.utils import save_image
 import torch.nn.functional as F
 
+import random
+
 CLASS_NAMES = [
     "airplane",
     "automobile",
@@ -31,6 +33,14 @@ CLASS_NAMES = [
 
 CIFAR10_MEAN = [0.4914, 0.4822, 0.4465]
 CIFAR10_STD = [0.2470, 0.2435, 0.2616]
+
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
 
 @torch.no_grad()
 def save_failures(cnn_model, dataloader, run_dir, max_to_save=100):
@@ -100,6 +110,7 @@ def evaluate(cnn_model, dataloader, loss_fn):
     acc = correct / total
     return avg_loss, acc
 
+set_seed(42)
 
 base_dataset = CIFAR10(root="data", train=True, download=True, transform=None)
 
@@ -153,9 +164,9 @@ test_loader = DataLoader(
 
 model = BaselineCNN()
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3,)
 
-num_epochs = 40
+num_epochs = 80
 
 patience = 6
 min_delta = 1e-4
@@ -164,7 +175,8 @@ best_val_loss = float("inf")
 best_state = None
 epochs_no_improve = 0
 
-run_dir = "runs/baseline_norm_aug"
+run_dir = "runs/arch_sweep_baseline_v2/bn_fc128_dropout0.3_conv4_128/"
+
 os.makedirs(run_dir, exist_ok=True)
 
 log_path = os.path.join(run_dir, "train_log.csv")

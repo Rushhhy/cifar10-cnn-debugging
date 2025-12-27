@@ -15,6 +15,6 @@ Baseline CNN on CIFAR-10 with:
 - Pooling: MaxPool(2)
 - Optimizer: Adam (lr=1e-3)
 - Loss: CrossEntropy
-- Epochs: 20
-- No normalization
-- No augmentation
+- Epochs: 40
+- normalization
+- augmentation
