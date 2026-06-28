@@ -1,7 +1,5 @@
 # CIFAR-10 CNN Debugging and Model Comparison
 
-This project trains and compares different deep learning models on the CIFAR-10 image classification dataset. The main goal was to start with a simple CNN baseline, improve it step by step, and compare the final custom CNN against stronger architectures such as ResNet18 and ViT Tiny.
-
 ## Project Goal
 
 * Train an image classifier for CIFAR-10.
@@ -148,12 +146,6 @@ The confusion matrix shows which CIFAR-10 classes the best custom CNN classified
 
 ![Best Custom CNN Confusion Matrix](figures/05_best_custom_cnn_seed0_confusion_matrix.png)
 
-Key points:
-
-* The diagonal values represent correct predictions.
-* Off-diagonal values represent mistakes between classes.
-* Confusion matrices are useful because accuracy alone does not show which classes are difficult.
-* Similar-looking classes, such as animals or vehicles, are usually more likely to be confused.
 
 ## Main Takeaways
 
@@ -199,10 +191,9 @@ Final performance:
 
 Possible next steps:
 
-* Add learning rate tuning for ResNet18.
 * Try stronger augmentations such as MixUp or AutoAugment.
 * Train for more epochs.
 * Try larger CNN architectures.
 * Add batch normalization and dropout tuning.
 * Compare pretrained models against models trained from scratch.
-* Tune ViT Tiny more carefully, since transformer models often need different training settings.
+* Tune ViT Tiny more carefully.
