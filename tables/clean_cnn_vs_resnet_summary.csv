@@ -1,0 +1,10 @@
+experiment,model,seed,normalize,augmentation,optimizer,lr,weight_decay,epochs_trained,best_val_loss,best_val_acc,test_acc
+adamw_cosine_ls0.1_bn_fc128_do0.3_conv4_128,baseline,0,true,true,AdamW,0.001,0.0005,80,0.870134229183197,0.8502,0.8461
+adamw_cosine_ls0.1_bn_fc128_do0.3_conv4_128,baseline,1,true,true,AdamW,0.001,0.0005,80,0.879385975074768,0.838,0.8403
+adamw_cosine_ls0.1_bn_fc128_do0.3_conv4_128,baseline,42,true,true,AdamW,0.001,0.0005,80,0.8738309253692627,0.8478,0.8395
+adamw_cosine_ls0.1_resnet18,resnet,0,true,true,AdamW,0.001,0.0005,65,0.6803607743263245,0.9322,0.9207
+adamw_cosine_ls0.1_resnet18,resnet,1,true,true,AdamW,0.001,0.0005,80,0.6733297300338745,0.9374,0.9306
+adamw_cosine_ls0.1_resnet18,resnet,42,true,true,AdamW,0.001,0.0005,80,0.678151134967804,0.937,0.9334
+adamw_cosine_ls0.1_vit_tiny,vit,42,true,true,AdamW,0.001,0.0005,54,0.9749381938934326,0.789,0.7901
+adamw_cosine_ls0.1_vit_tiny,vit,0,true,true,AdamW,0.001,0.0005,61,0.9656961428642272,0.8,0.7999
+adamw_cosine_ls0.1_vit_tiny,vit,1,true,true,AdamW,0.001,0.0005,66,0.9696615591049196,0.7988,0.8053

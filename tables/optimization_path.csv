@@ -1,0 +1,10 @@
+experiment,test_acc_percent
+Baseline,70.63000000000001
+Normalization,71.27
+Augmentation,76.25999999999999
+BatchNorm,78.91
+BatchNorm + Dropout,80.43
+Deeper CNN,81.67
+AdamW + Cosine,83.58
+Label Smoothing,83.6
+CutMix,83.66
